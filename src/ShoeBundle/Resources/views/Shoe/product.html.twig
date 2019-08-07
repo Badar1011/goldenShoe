@@ -1,0 +1,79 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <section class="section section-lg bg-default">
+        <div class="card">
+            <div class="container-fliud">
+                <div class="wrapper row">
+                    <div class="preview col-md-6">
+                        <div class="preview-pic tab-content">
+                            {% for data in product.image %}
+
+
+                                    {% set count = 1 %}
+                                   {% if count == 1 %}
+                                    <div class="tab-pane active" id="pic-{{ count }}"><img src="{{ asset('uploads/images/' ~ data.image) }}" /></div>
+                                    {% else %}
+                                        <div class="tab-pane" style="height: 50px;" id="pic-{{ count }}"><img src="{{ asset('uploads/images/' ~ data.image) }}" /></div>
+                                    {% endif %}
+                                    {% set count = count + 1 %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="details col-md-6">
+                        <h3 class="product-title">{{ product.name }}</h3>
+                        <p class="product-description">{{ product.description }}</p>
+                        <h4 class="price">current price: <span>£{{ product.price  }}</span></h4>
+                        <h4><b>Product Released: {{ product.releasedDate | date('d M Y') }}</b></h4>
+
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                              {% for item in product.size %}
+                                  {% set shoeSize = item.size   %}
+                                 {% for data in item.colour %}
+
+                                {% if data.stock > 0 %}
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" id="option1" autocomplete="off"> Size: {{ shoeSize }}  {% if data.stock < 6 %}| Stock: {{ data.stock }} {% else %} | Stock: >5 {% endif %} | Colour: {{ data.colour }}
+                                </label><br>
+                                {% else %}
+                                    <label class="btn btn-primary">
+                                        <input type="radio" name="options" id="option1" autocomplete="off" disabled> Size: {{ shoeSize }} | Stock: {{ data.stock }} | Colour: {{ data.colour }}<br>
+                                    </label><br>
+                                {% endif %}
+                                     <br>
+                                      {% endfor %}
+                            {% endfor %}
+                        </div>
+                        <div class="action">
+                            <button class="btn-lg btn-default" type="button">add to cart</button>
+                            <button class="btn-lg btn-primary" type="button" data-toggle="modal" data-target="#myModal">one click buy</button>
+
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <h3>your order has been placed</h3>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <label for="voucher" style="padding-top: 20px;">Voucher Code</label>
+                        <input type="text" class="form-control" id="voucher" placeholder="234dfG5gDAE4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

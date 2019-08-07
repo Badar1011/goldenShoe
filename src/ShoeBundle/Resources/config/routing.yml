@@ -1,0 +1,23 @@
+index_page:
+    path: /
+    defaults: { _controller: ShoeBundle:Default:index }
+    requirements:
+        _method: GET
+
+product_page:
+    path: /products/{id}
+    defaults: { _controller: ShoeBundle:Default:product }
+    requirements:
+        _method: GET
+
+return_page:
+    path: /return
+    defaults: { _controller: ShoeBundle:Default:returnItem }
+    requirements:
+        _method: GET
+
+track_delivery_page:
+    path: /track
+    defaults: { _controller: ShoeBundle:Default:trackItem }
+    requirements:
+        _method: GET

@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+
+    <div class="form-group">
+        <label for="orderNo">Tracking Item</label>
+        <input type="text" class="form-control" id="orderNo" placeholder="54HJBG94">
+    </div>
+    <button class="btn-lg btn-primary" onclick="function f() {
+           const orderData = document.getElementById('orderNews');
+           orderData.style.visibility = 'visible';
+            } f()">Track Order</button>
+    <p id="orderNews" style="visibility: hidden">
+        your order has left the warehouse
+        you should receive it by thursday
+        check more on <a href="https://bbc.com">the delivery company</a> using your order number
+    </p>
+{% endblock %}
